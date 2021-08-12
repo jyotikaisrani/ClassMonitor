@@ -1,0 +1,54 @@
+Const AttachmentPath As String = "C:\MYATTACHMENTS\"
+Public Sub GetFromOutlook2()
+   MkDir "C:\MYATTACHMENTS"
+   Dim outlookAtch As Object
+   Dim NewFileName As String
+   NewFileName = AttachmentPath & Format(Date, "DD-MM-YYYY") & "-"
+   Dim OutlookApp As Outlook.Application
+   Dim OutlookNamespace As Namespace
+   Dim Folder As MAPIFolder
+   Dim OutlookMail As Variant
+   Dim i As Integer
+   Dim objFolder As Outlook.Folder
+   Dim objNS As Outlook.Namespace
+   Dim objMail As Outlook.MailItem
+   Dim lCounter As Long
+    'Set objects
+   Set objNS = Outlook.GetNamespace("MAPI")
+   Set objFolder = objNS.PickFolder
+   Dim col As Long
+   col = 0
+   Set OutlookApp = New Outlook.Application
+   Set OutlookNamespace = OutlookApp.GetNamespace("MAPI")
+   i = 3
+
+   For Each OutlookMail In objFolder.Items
+    If OutlookMail.Attachments.Count > 0 Then
+        For Each outlookAtch In OutlookMail.Attachments
+            'If objMail.ReceivedTime >= Range("start_Date").Value Then
+                Sheet1.Range("A" & i + 1).Value = OutlookMail.Subject
+                Sheet1.Range("B" & i + 1).Value = OutlookMail.ReceivedTime
+                Sheet1.Range("C" & i + 1).Value = OutlookMail.SenderName
+                Sheet1.Range("D" & i + 1).Value = OutlookMail.SenderEmailAddress
+                
+                outlookAtch.SaveAsFile NewFileName & outlookAtch.Filename
+                Sheet1.Range("E" & i + 1).Value = outlookAtch
+                i = i + 1
+                    
+            'End If
+            
+        Next outlookAtch
+    
+        'col = 0
+        
+    End If
+   Next OutlookMail
+   'Show confirmation message to user
+   MsgBox "Done", vbInformation
+
+   Set Folder = Nothing
+   Set OutlookNamespace = Nothing
+   Set OutlookApp = Nothing
+
+End Sub
+
