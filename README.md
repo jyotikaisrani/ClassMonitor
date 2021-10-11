@@ -1,5 +1,5 @@
 # ClassMonitor
-This is basically a software built by us for the help of teachers in online era of education. Tracking student record during this quarantine period has been a hectic job for teachers due to the fact that most of them are 40+ and hence, aren't tech-friendly. This is resulting in low efficiency of online education and assessment.          
+This is basically a software built by us to help teachers in this online era of education. Tracking student record during this quarantine period has been a hectic job for teachers due to the fact that most of them are 40+ and hence, aren't tech-friendly. This is resulting in low efficiency of online education and assessment.          
    
  #Problem Statements-
  
